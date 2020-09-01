@@ -4,19 +4,19 @@ include_directories(${PYTHON_INCLUDE_DIRS})
 
 include_directories(
         include
-        ${CMAKE_SOURCE_DIR}/parser/include)
+        ${CMAKE_SOURCE_DIR}/test_lib/include)
 
-add_library(pythonparser SHARED
-        src/pythonparser.cpp
+add_executable(test
+        src/lib.cpp
         src/asdf.py)
 
 find_package (Python)
 
-target_link_libraries(pythonparser ${PYTHON_LIBRARIES})
+target_link_libraries(test ${PYTHON_LIBRARIES})
 
-target_compile_options(pythonparser PUBLIC -Wno-unknown-pragmas)
+target_compile_options(test PUBLIC -Wno-unknown-pragmas)
 
 set(ENV{PYTHONPATH} "${CMAKE_SOURCE_DIR}/src")
 message(STATUS "the value of PYTHONPATH: " $ENV{PYTHONPATH})
 
-install(TARGETS pythonparser DESTINATION ${INSTALL_PARSER_DIR})
+install(TARGETS test DESTINATION ${INSTALL_PARSER_DIR})
